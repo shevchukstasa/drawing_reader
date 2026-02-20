@@ -25,7 +25,7 @@ function FieldRow({ label, field, suffix = '' }) {
     return (
       <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #1a1a2e' }}>
         <span style={{ color: '#6b7280', fontSize: 13 }}>{label}</span>
-        <span style={{ color: '#f87171', fontSize: 13, fontStyle: 'italic' }}>не указано</span>
+        <span style={{ color: '#f87171', fontSize: 13, fontStyle: 'italic' }}>not specified</span>
       </div>
     );
   }
@@ -47,7 +47,7 @@ function FieldRow({ label, field, suffix = '' }) {
 
 /* ───────── Position card ───────── */
 function PositionCard({ pos, index }) {
-  const [expanded, setExpanded] = useState(index < 5); // auto-expand first 5
+  const [expanded, setExpanded] = useState(index < 5);
   const hasQ = pos.questions_for_manager?.length > 0;
 
   return (
@@ -72,7 +72,7 @@ function PositionCard({ pos, index }) {
           }}>{pos.position_number || index + 1}</span>
           <div>
             <span style={{ color: '#e5e7eb', fontSize: 14, fontWeight: 600 }}>
-              {pos.zone_or_area || `Позиция ${pos.position_number || index + 1}`}
+              {pos.zone_or_area || `Position ${pos.position_number || index + 1}`}
             </span>
             {pos.product_type?.value && (
               <span style={{ color: '#6366f1', fontSize: 12, marginLeft: 10 }}>
@@ -84,7 +84,7 @@ function PositionCard({ pos, index }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {hasQ && (
             <span style={{ background: '#92400e', color: '#fbbf24', fontSize: 10, fontWeight: 700, padding: '3px 8px', borderRadius: 4 }}>
-              {pos.questions_for_manager.length} вопрос(ов)
+              {pos.questions_for_manager.length} question(s)
             </span>
           )}
           <span style={{ color: '#6b7280', fontSize: 18, transform: expanded ? 'rotate(180deg)' : 'none', transition: '0.2s' }}>▾</span>
@@ -96,30 +96,30 @@ function PositionCard({ pos, index }) {
         <div style={{ padding: '16px 20px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 32px' }}>
             <div>
-              <div style={{ color: '#6366f1', fontSize: 10, fontWeight: 700, letterSpacing: 1.5, marginBottom: 8, textTransform: 'uppercase' }}>Для калькулятора</div>
-              <FieldRow label="Тип изделия" field={pos.product_type} />
-              <FieldRow label="Форма" field={pos.product_shape} />
-              <FieldRow label="Длина" field={pos.length_cm} suffix=" см" />
-              <FieldRow label="Ширина" field={pos.width_cm} suffix=" см" />
-              <FieldRow label="Толщина" field={pos.thickness_cm} suffix=" см" />
-              <FieldRow label="Стандартный размер" field={{ value: pos.is_standard_size ? 'Да' : 'Нет (кастом)' }} />
-              <FieldRow label="Глазурь (где)" field={pos.glaze_placement} />
-              <FieldRow label="Цвет глазури" field={pos.glaze_color} />
-              <FieldRow label="Кастомный цвет" field={{ value: pos.is_custom_color ? 'Да ⚠' : 'Нет (из палитры)' }} />
-              <FieldRow label="Нанесение" field={pos.application} />
-              <FieldRow label="Финишинг" field={pos.finishing} />
+              <div style={{ color: '#6366f1', fontSize: 10, fontWeight: 700, letterSpacing: 1.5, marginBottom: 8, textTransform: 'uppercase' }}>For Calculator</div>
+              <FieldRow label="Product Type" field={pos.product_type} />
+              <FieldRow label="Shape" field={pos.product_shape} />
+              <FieldRow label="Length" field={pos.length_cm} suffix=" cm" />
+              <FieldRow label="Width" field={pos.width_cm} suffix=" cm" />
+              <FieldRow label="Thickness" field={pos.thickness_cm} suffix=" cm" />
+              <FieldRow label="Standard Size" field={{ value: pos.is_standard_size ? 'Yes' : 'No (custom)' }} />
+              <FieldRow label="Glaze Placement" field={pos.glaze_placement} />
+              <FieldRow label="Glaze Color" field={pos.glaze_color} />
+              <FieldRow label="Custom Color" field={{ value: pos.is_custom_color ? 'Yes ⚠' : 'No (from palette)' }} />
+              <FieldRow label="Application" field={pos.application} />
+              <FieldRow label="Finishing" field={pos.finishing} />
             </div>
             <div>
-              <div style={{ color: '#6366f1', fontSize: 10, fontWeight: 700, letterSpacing: 1.5, marginBottom: 8, textTransform: 'uppercase' }}>Количество и доп. информация</div>
-              <FieldRow label="Количество (шт)" field={pos.quantity_pcs} />
-              <FieldRow label="Площадь (м²)" field={pos.quantity_m2} />
-              <FieldRow label="Кол-во цветов" field={{ value: pos.num_glaze_colors || 1 }} />
-              <FieldRow label="Кромка" field={{ value: pos.edge_profile || 'не указано' }} />
-              <FieldRow label="Вырезы" field={{ value: pos.cutouts || 'нет' }} />
-              <FieldRow label="Текстура камня" field={{ value: pos.surface_texture || 'не указано' }} />
+              <div style={{ color: '#6366f1', fontSize: 10, fontWeight: 700, letterSpacing: 1.5, marginBottom: 8, textTransform: 'uppercase' }}>Quantity & Additional Info</div>
+              <FieldRow label="Quantity (pcs)" field={pos.quantity_pcs} />
+              <FieldRow label="Area (m²)" field={pos.quantity_m2} />
+              <FieldRow label="Glaze Colors" field={{ value: pos.num_glaze_colors || 1 }} />
+              <FieldRow label="Edge Profile" field={{ value: pos.edge_profile || 'not specified' }} />
+              <FieldRow label="Cutouts" field={{ value: pos.cutouts || 'none' }} />
+              <FieldRow label="Stone Texture" field={{ value: pos.surface_texture || 'not specified' }} />
               {hasQ && (
                 <div style={{ marginTop: 16 }}>
-                  <div style={{ color: '#fbbf24', fontSize: 10, fontWeight: 700, letterSpacing: 1.5, marginBottom: 8, textTransform: 'uppercase' }}>⚠ Требуется уточнение</div>
+                  <div style={{ color: '#fbbf24', fontSize: 10, fontWeight: 700, letterSpacing: 1.5, marginBottom: 8, textTransform: 'uppercase' }}>⚠ Clarification Needed</div>
                   {pos.questions_for_manager.map((q, i) => (
                     <div key={i} style={{
                       background: '#1a1200', border: '1px solid #422006',
@@ -163,17 +163,17 @@ export default function Home() {
   const analyze = async () => {
     if (!file) return;
     setLoading(true); setError(null); setResult(null);
-    setProgress('Подготовка файла...');
+    setProgress('Preparing file...');
 
     try {
       const base64 = await new Promise((res, rej) => {
         const r = new FileReader();
         r.onload = () => res(r.result.split(',')[1]);
-        r.onerror = () => rej(new Error('Ошибка чтения'));
+        r.onerror = () => rej(new Error('File read error'));
         r.readAsDataURL(file);
       });
 
-      setProgress(provider === 'anthropic' ? 'Анализ через Claude Sonnet...' : 'Анализ через GPT-4o...');
+      setProgress(provider === 'anthropic' ? 'Analyzing with Claude Sonnet...' : 'Analyzing with GPT-4o...');
 
       const resp = await fetch('/api/analyze', {
         method: 'POST',
@@ -215,15 +215,15 @@ export default function Home() {
             fontSize: 18, fontWeight: 900, color: '#fff',
           }}>◆</div>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#fff' }}>Drawing Parser</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#fff' }}>Drawing Reader</div>
             <div style={{ fontSize: 11, color: '#6b7280' }}>Lava Stone Spec Extractor</div>
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           {result && (
             <div style={{ display: 'flex', gap: 14, fontSize: 12, marginRight: 8 }}>
-              <span style={{ color: '#818cf8' }}><b>{result.positions?.length || 0}</b> позиций</span>
-              {totalQ > 0 && <span style={{ color: '#fbbf24' }}><b>{totalQ}</b> вопросов</span>}
+              <span style={{ color: '#818cf8' }}><b>{result.positions?.length || 0}</b> positions</span>
+              {totalQ > 0 && <span style={{ color: '#fbbf24' }}><b>{totalQ}</b> questions</span>}
             </div>
           )}
           <div style={{ display: 'flex', borderRadius: 6, overflow: 'hidden', border: '1px solid #2a2a4a', fontSize: 11, fontWeight: 600 }}>
@@ -245,42 +245,66 @@ export default function Home() {
       {/* ── Content ── */}
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 28px' }}>
 
-        {/* Upload */}
+        {/* Upload area */}
         {!result && (
-          <div
-            onDragOver={e => { e.preventDefault(); setDragOver(true); }}
-            onDragLeave={() => setDragOver(false)}
-            onDrop={e => { e.preventDefault(); setDragOver(false); handleFile(e.dataTransfer.files[0]); }}
-            onClick={() => fileRef.current?.click()}
-            style={{
-              border: `2px dashed ${dragOver ? '#6366f1' : file ? '#1e40af' : '#2a2a4a'}`,
-              borderRadius: 12, padding: file ? '20px' : '48px',
-              textAlign: 'center', cursor: 'pointer',
-              background: dragOver ? 'rgba(99,102,241,0.05)' : file ? 'rgba(30,64,175,0.05)' : 'transparent',
-              transition: 'all 0.2s', marginBottom: 20,
-            }}
-          >
-            <input ref={fileRef} type="file" accept="image/*,.pdf" onChange={e => handleFile(e.target.files[0])} style={{ display: 'none' }} />
-            {file ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                {preview
-                  ? <img src={preview} alt="" style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 8, border: '1px solid #2a2a4a' }} />
-                  : <div style={{ width: 80, height: 80, borderRadius: 8, background: '#1e1e3a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28 }}>📄</div>
-                }
-                <div style={{ textAlign: 'left' }}>
-                  <div style={{ color: '#e5e7eb', fontSize: 14, fontWeight: 600 }}>{file.name}</div>
-                  <div style={{ color: '#6b7280', fontSize: 12, marginTop: 2 }}>{(file.size / 1024 / 1024).toFixed(2)} MB</div>
-                  <div style={{ color: '#818cf8', fontSize: 12, marginTop: 4 }}>Нажмите, чтобы заменить</div>
+          <>
+            <div
+              onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={e => { e.preventDefault(); setDragOver(false); handleFile(e.dataTransfer.files[0]); }}
+              onClick={() => fileRef.current?.click()}
+              style={{
+                border: `2px dashed ${dragOver ? '#6366f1' : file ? '#1e40af' : '#2a2a4a'}`,
+                borderRadius: 12, padding: file ? '20px' : '48px',
+                textAlign: 'center', cursor: 'pointer',
+                background: dragOver ? 'rgba(99,102,241,0.05)' : file ? 'rgba(30,64,175,0.05)' : 'transparent',
+                transition: 'all 0.2s', marginBottom: 16,
+              }}
+            >
+              <input ref={fileRef} type="file" accept="image/*,.pdf" onChange={e => handleFile(e.target.files[0])} style={{ display: 'none' }} />
+              {file ? (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                  {preview
+                    ? <img src={preview} alt="" style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 8, border: '1px solid #2a2a4a' }} />
+                    : <div style={{ width: 80, height: 80, borderRadius: 8, background: '#1e1e3a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28 }}>📄</div>
+                  }
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ color: '#e5e7eb', fontSize: 14, fontWeight: 600 }}>{file.name}</div>
+                    <div style={{ color: '#6b7280', fontSize: 12, marginTop: 2 }}>{(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                    <div style={{ color: '#818cf8', fontSize: 12, marginTop: 4 }}>Click to replace</div>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div style={{ fontSize: 40, marginBottom: 12, opacity: 0.6 }}>📐</div>
+                  <div style={{ color: '#e5e7eb', fontSize: 15, fontWeight: 600, marginBottom: 6 }}>Drag & drop your drawing here</div>
+                  <div style={{ color: '#6b7280', fontSize: 13 }}>PDF, JPG, PNG · Blueprints, sketches, photos</div>
+                </>
+              )}
+            </div>
+
+            {/* Upload button */}
+            {!file && (
+              <div style={{ textAlign: 'center', marginBottom: 20 }}>
+                <span style={{ color: '#6b7280', fontSize: 13 }}>or</span>
+                <div style={{ marginTop: 8 }}>
+                  <button
+                    onClick={() => fileRef.current?.click()}
+                    style={{
+                      padding: '10px 24px', borderRadius: 8,
+                      border: '1px solid #2a2a4a', background: '#1e1e3a',
+                      color: '#818cf8', fontSize: 14, fontWeight: 600,
+                      cursor: 'pointer', transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={e => { e.target.style.background = '#2a2a4a'; e.target.style.borderColor = '#6366f1'; }}
+                    onMouseLeave={e => { e.target.style.background = '#1e1e3a'; e.target.style.borderColor = '#2a2a4a'; }}
+                  >
+                    📁 Upload File
+                  </button>
                 </div>
               </div>
-            ) : (
-              <>
-                <div style={{ fontSize: 40, marginBottom: 12, opacity: 0.6 }}>📐</div>
-                <div style={{ color: '#e5e7eb', fontSize: 15, fontWeight: 600, marginBottom: 6 }}>Перетащите чертёж сюда</div>
-                <div style={{ color: '#6b7280', fontSize: 13 }}>PDF, JPG, PNG · Чертежи, эскизы, фото</div>
-              </>
             )}
-          </div>
+          </>
         )}
 
         {/* Analyze button */}
@@ -296,14 +320,14 @@ export default function Home() {
               <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
                 <span className="spinner" /> {progress}
               </span>
-            ) : `🔍 Анализировать через ${provider === 'anthropic' ? 'Claude' : 'GPT-4o'}`}
+            ) : `🔍 Analyze with ${provider === 'anthropic' ? 'Claude' : 'GPT-4o'}`}
           </button>
         )}
 
         {/* Error */}
         {error && (
           <div style={{ background: '#1a0505', border: '1px solid #5c1a1a', borderRadius: 8, padding: '14px 20px', marginBottom: 20, color: '#fca5a5', fontSize: 13 }}>
-            <strong>Ошибка:</strong> {error}
+            <strong>Error:</strong> {error}
           </div>
         )}
 
@@ -315,10 +339,10 @@ export default function Home() {
               <div style={{ background: '#0d0d1a', border: '1px solid #1e1e3a', borderRadius: 8, padding: '16px 20px', marginBottom: 20 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div>
-                    <div style={{ color: '#6366f1', fontSize: 10, fontWeight: 700, letterSpacing: 1.5, marginBottom: 6, textTransform: 'uppercase' }}>Проект</div>
-                    <div style={{ color: '#fff', fontSize: 18, fontWeight: 700 }}>{result.project.name || 'Без названия'}</div>
+                    <div style={{ color: '#6366f1', fontSize: 10, fontWeight: 700, letterSpacing: 1.5, marginBottom: 6, textTransform: 'uppercase' }}>Project</div>
+                    <div style={{ color: '#fff', fontSize: 18, fontWeight: 700 }}>{result.project.name || 'Untitled'}</div>
                     <div style={{ display: 'flex', gap: 12, marginTop: 4 }}>
-                      {result.project.language && <span style={{ color: '#9ca3af', fontSize: 12 }}>Язык: {result.project.language}</span>}
+                      {result.project.language && <span style={{ color: '#9ca3af', fontSize: 12 }}>Language: {result.project.language}</span>}
                       <span style={{ color: '#6b7280', fontSize: 12 }}>via {usedProvider === 'anthropic' ? 'Claude Sonnet' : 'GPT-4o'}</span>
                     </div>
                   </div>
@@ -338,9 +362,9 @@ export default function Home() {
             {/* Summary */}
             <div style={{ display: 'flex', gap: 12, marginBottom: 20, flexWrap: 'wrap' }}>
               {[
-                { v: result.positions?.length || 0, l: 'Позиций', c: '#818cf8' },
-                { v: totalQ, l: 'Вопросов', c: totalQ > 0 ? '#fbbf24' : '#4ade80' },
-                { v: result.positions?.filter(p => p.is_custom_color).length || 0, l: 'Кастом. цветов', c: '#e5e7eb' },
+                { v: result.positions?.length || 0, l: 'Positions', c: '#818cf8' },
+                { v: totalQ, l: 'Questions', c: totalQ > 0 ? '#fbbf24' : '#4ade80' },
+                { v: result.positions?.filter(p => p.is_custom_color).length || 0, l: 'Custom Colors', c: '#e5e7eb' },
               ].map((s, i) => (
                 <div key={i} style={{ flex: 1, minWidth: 140, background: '#0d0d1a', border: '1px solid #1e1e3a', borderRadius: 8, padding: '14px 16px', textAlign: 'center' }}>
                   <div style={{ fontSize: 28, fontWeight: 800, color: s.c, fontFamily: "'JetBrains Mono', monospace" }}>{s.v}</div>
@@ -351,7 +375,7 @@ export default function Home() {
                 minWidth: 140, background: '#1e1e3a', border: '1px solid #2a2a4a',
                 borderRadius: 8, padding: '14px 16px', cursor: 'pointer',
                 color: '#818cf8', fontSize: 13, fontWeight: 600, textAlign: 'center',
-              }}>📐 Новый чертёж</button>
+              }}>📐 New Drawing</button>
             </div>
 
             {/* Warnings */}
@@ -366,7 +390,7 @@ export default function Home() {
 
             {/* Raw JSON */}
             <details style={{ marginTop: 20 }}>
-              <summary style={{ color: '#6b7280', fontSize: 12, cursor: 'pointer', padding: '8px 0' }}>Показать JSON</summary>
+              <summary style={{ color: '#6b7280', fontSize: 12, cursor: 'pointer', padding: '8px 0' }}>Show JSON Response</summary>
               <pre style={{ background: '#0d0d1a', border: '1px solid #1e1e3a', borderRadius: 8, padding: 16, overflow: 'auto', fontSize: 11, color: '#9ca3af', maxHeight: 400 }}>
                 {JSON.stringify(result, null, 2)}
               </pre>
